@@ -1,0 +1,10 @@
+---
+- hosts: wordpress
+  become: yes
+  roles: 
+  - wordpress
+
+- hosts: mysql
+  become: yes
+  roles:
+  - mysql

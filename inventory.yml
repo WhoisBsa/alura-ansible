@@ -1,0 +1,21 @@
+all:
+  hosts:
+    wordpress:
+      ansible_host: 192.168.1.103
+      ansible_user: alura
+      ansible_ssh_private_key_file: '/home/alura/ansible/keys/delta1'
+      ansible_become_pass: "{{ lookup('community.general.passwordstore', 'ansible/wordpress') }}"
+    
+    mysql:
+      ansible_host: 192.168.1.102
+      ansible_user: alura
+      ansible_ssh_private_key_file: '/home/alura/ansible/keys/db'
+      ansible_become_pass: "{{ lookup('community.general.passwordstore', 'ansible/db') }}"
+
+  vars:
+    wp_dir: '/srv/www/wordpress/'
+    wp_db_name: 'wordpress_db'
+    wp_db_user: 'wordpress_usr'
+    wp_db_pwd: "{{ lookup('community.general.passwordstore', 'ansible/db_user_pwd') }}"      
+    wordpress_db_ip: "192.168.1.102"
+    db_allowed_host: "192.168.1.103"
